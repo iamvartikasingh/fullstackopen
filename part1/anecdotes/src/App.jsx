@@ -1,79 +1,67 @@
+const Header = (props) => {
+  return <h1>{props.name}</h1>;
+};
 
-
-const Header = (course1) => {
-return (
-<h1>{course1.name}</h1>
-)
-}
-
-const Part =(exercises)=> {
- 
+const Part = (props) => {
   return (
-
-       <div>
-      <p>
-    {exercises.part} {exercises.number}
-
-     </p>
-    </div>
-   
-  )
-}
-const Content = (prop) => {
-  return (
-    <div>
-     <Part part={prop.part1} number={prop.exercises1} />
-     <Part part={prop.part2} number={prop.exercises2} />
-     <Part part={prop.part3} number={prop.exercises3} />
-
-     
-    </div>
-   
-  )
-  }
-  const Total = (props) => {
-    
-    return (
-      <p>
-        Number of exercises  {props.number1 + props.number2+props.number3}
+    <p>
+      {props.name} {props.exercises}
     </p>
-    )
-    }
-      
-  
+  );
+};
 
+const Content = (props) => {
+  const items = [];
+
+  // Using a for loop to iterate over the parts array
+  for (let i = 0; i < props.parts.length; i++) {
+    items.push(
+      <Part
+        key={i}
+        name={props.parts[i].name}
+        exercises={props.parts[i].exercises}
+      />
+    );
+  }
+
+  return <div>{items}</div>;
+};
+
+const Total = (props) => {
+  let totalExercises = 0;
+
+  // Using a for loop to calculate the total
+  for (let i = 0; i < props.parts.length; i++) {
+    totalExercises += props.parts[i].exercises;
+  }
+
+  return <p>Number of exercises {totalExercises}</p>;
+};
 
 const App = () => {
-
-  const course = 'Half Stack application development'
+  const course = 'Half Stack application development';
   const parts = [
     {
       name: 'Fundamentals of React',
-      exercises: 10
+      exercises: 10,
     },
     {
       name: 'Using props to pass data',
-      exercises: 7
+      exercises: 7,
     },
     {
       name: 'State of a component',
-      exercises: 14
-    }
-  ]
+      exercises: 14,
+    },
+  ];
 
-
-  return(
+  return (
     <div>
       <Header name={course} />
-      <Content
-  part1={parts[0].name} exercises1={parts[0].exercises}
-  part2={parts[1].name} exercises2={parts[1].exercises}
-  part3={parts[2].name} exercises3={parts[2].exercises}
-/>
-<Total  number1={parts[0].exercises} number2={parts[1].exercises} number3={parts[2].exercises} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
-  )
+  );
+};
 
-}
-
-export default App
+export default App;
