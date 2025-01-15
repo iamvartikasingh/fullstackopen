@@ -70,6 +70,7 @@ const App = () => {
 <Total  number1={part1.exercises} number2={part2.exercises} number3={part3.exercises} />
     </div>
   )
+
 }
 
 export default App
