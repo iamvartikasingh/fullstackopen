@@ -1,5 +1,12 @@
 import{ useState } from 'react';
+const Button = (props) => {
+  
+  return(
+  <button onClick={props.onClick} >
+  {props.text}
+</button>
 
+)}
 const Statistics = ({ props }) => {
   const { good, neutral, bad } = props;
   const total = good + neutral + bad;
@@ -34,7 +41,12 @@ console.log()
   return(
     <div>
       <h1>Give feedback</h1>
-      <button onClick={(increaseGoodByOne)}>
+      <Button onClick={increaseGoodByOne} text={"Good"} />
+      <Button onClick={increaseBadByOne}  text= {"Bad"}/>
+
+      <Button onClick={increaseNeutralByOne}   text= {"Neutral"}/>
+
+      {/* <button onClick={(increaseGoodByOne)}>
         Good
       </button>
       <button onClick={increaseNeutralByOne}>
@@ -42,7 +54,7 @@ console.log()
       </button>
       <button onClick={increaseBadByOne}>
         bad
-      </button>
+      </button> */}
       <h1>Statistics</h1>
 
       <Statistics props={{ good, neutral, bad }} /> 
