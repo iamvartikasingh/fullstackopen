@@ -13,9 +13,8 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
-    const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));  // Initialize votes array
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));  // Initialize votes array
 
-  // Function to handle voting
   const handleVote = () => {
     const copy = [...votes];      // Copy the votes array
     copy[selected] += 1;          // Increment vote for the selected anecdote
