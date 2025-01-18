@@ -3,7 +3,7 @@ import{ useState } from 'react';
 const Statistics = ({ props }) => {
   const { good, neutral, bad } = props;
   const total = good + neutral + bad;
-  const average = total === 0 ? 0 : (good - bad) / total;
+  const average = total === 0 ? 0 : ((1*good)+(bad*(-1)))/total;
   const positivePercentage = total === 0 ? 0 : (good / total) * 100;
 
   if (total === 0) {
@@ -34,7 +34,6 @@ console.log()
   return(
     <div>
       <h1>Give feedback</h1>
-      <Statistics props={{ good, neutral, bad }} />x    
       <button onClick={(increaseGoodByOne)}>
         Good
       </button>
@@ -44,12 +43,10 @@ console.log()
       <button onClick={increaseBadByOne}>
         bad
       </button>
+      <h1>Statistics</h1>
 
-      <p>Good {good}</p>
-      <p>Neutral {neutral}</p>
-      <p>Bad {bad}</p>
-      <p>Average {(good+bad+neutral)/3}</p>
-      <p>positive {(good)*100/(good+bad+neutral)}%</p>
+      <Statistics props={{ good, neutral, bad }} /> 
+   
 
      </div>
   )
