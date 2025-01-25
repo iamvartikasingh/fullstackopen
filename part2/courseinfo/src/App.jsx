@@ -1,65 +1,79 @@
-const Header = (props) => {
-  return <h1>{props.name}</h1>;
+const Course = ({ course }) => {
+  // Ensure 'course' is being passed down correctly
+  return (
+    <div>
+      <Header name={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
+    </div>
+  );
 };
 
-const Part = (props) => {
+const Header = ({ name }) => {
+  return <h1>{name}</h1>;
+};
+
+const Part = ({ name, exercises }) => {
   return (
     <p>
-      {props.name} {props.exercises}
+      {name} {exercises}
     </p>
   );
 };
 
-const Content = (props) => {
-  const items = [];
-
-  // Using a for loop to iterate over the parts array
-  for (let i = 0; i < props.parts.length; i++) {
-    items.push(
-      <Part
-        key={i}
-        name={props.parts[i].name}
-        exercises={props.parts[i].exercises}
-      />
-    );
+const Content = ({ parts }) => {
+  // Ensure 'parts' is valid and not undefined
+  if (!parts) {
+    return <p>No parts available</p>;
   }
 
-  return <div>{items}</div>;
+  return (
+    <div>
+      {parts.map((part) => (
+        <Part key={part.id} name={part.name} exercises={part.exercises} />
+      ))}
+    </div>
+  );
 };
 
-const Total = (props) => {
-  let totalExercises = 0;
-
-  // Using a for loop to calculate the total
-  for (let i = 0; i < props.parts.length; i++) {
-    totalExercises += props.parts[i].exercises;
+const Total = ({ parts }) => {
+  // Ensure 'parts' is valid
+  if (!parts) {
+    return <p>No exercises to count</p>;
   }
+
+  const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
 
   return <p>Number of exercises {totalExercises}</p>;
 };
 
 const App = () => {
-  const course = 'Half Stack application development';
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10,
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7,
-    },
-    {
-      name: 'State of a component',
-      exercises: 14,
-    },
-  ];
-
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      }
+    ]
+  }
   return (
     <div>
-      <Header name={course} />
-      <Content parts={parts} />
-      <Total parts={parts} />
+      <Course course={course} />
+    
+      
     </div>
   );
 };
