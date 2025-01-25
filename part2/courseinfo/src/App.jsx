@@ -29,9 +29,10 @@ const Content = ({ parts }) => {
 
   return (
     <div>
-      {parts.map((part) => (
-        <Part key={part.id} name={part.name} exercises={part.exercises} />
-      ))}
+      {parts.map((part)=>
+      < Part key={part.id} name={part.name} exercises={part.exercises} />
+     
+      )}
     </div>
   );
 };
@@ -42,7 +43,7 @@ const Total = ({ parts }) => {
     return <p>No exercises to count</p>;
   }
 
-  const totalExercises = parts.reduce((sum, part) => sum + part.exercises, 0);
+  const totalExercises =parts.reduce((sum,part) => sum+part.exercises, 0)
 
   return <p>Number of exercises {totalExercises}</p>;
 };
@@ -66,6 +67,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
