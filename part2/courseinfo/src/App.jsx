@@ -49,8 +49,6 @@ const App = () => {
     <div>
       <Course course={courses[0]} />
       <Course course={courses[1]} />
-
-      
     </div>
   );
 };
